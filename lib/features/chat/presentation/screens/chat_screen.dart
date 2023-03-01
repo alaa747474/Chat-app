@@ -1,4 +1,5 @@
 import 'package:chat_app/core/widgets/custom_sliver_app_bar.dart';
+import 'package:chat_app/features/chat/presentation/screens/messages_screen.dart';
 import 'package:chat_app/features/chat/presentation/widgets/chat_contact_card.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,9 @@ class ChatScreen extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               
               (BuildContext context, int index) {
-                return ChatContactCard();
+                return InkWell(
+                  onTap: ()=>Navigator.pushNamed(context, MessagesScreen.routeName),
+                  child: ChatContactCard());
               },
               childCount: 20,
             ),
