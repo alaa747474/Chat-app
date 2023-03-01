@@ -1,5 +1,4 @@
 import 'package:chat_app/core/widgets/custom_sliver_app_bar.dart';
-import 'package:chat_app/features/chat/presentation/widgets/chat_contact_card.dart';
 import 'package:chat_app/features/contacts/presentation/widgets/contact_details_card.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +9,6 @@ class ContactsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [

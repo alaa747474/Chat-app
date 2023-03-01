@@ -1,4 +1,6 @@
+import 'package:chat_app/core/router/app_router.dart';
 import 'package:chat_app/core/utils/theme.dart';
+import 'package:chat_app/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:chat_app/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,7 +23,8 @@ class MyApp extends StatelessWidget {
             title: 'Flutter Demo',
             theme: AppTheme.theme(),
             debugShowCheckedModeBanner: false,
-            home: HomeScreen(),
+            onGenerateRoute: AppRouter.generateRoute,
+            initialRoute: SignInScreen.routeName,
           );
         });
   }
