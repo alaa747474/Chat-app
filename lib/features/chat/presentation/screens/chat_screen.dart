@@ -21,7 +21,7 @@ class ChatScreen extends StatelessWidget {
               (BuildContext context, int index) {
                 return InkWell(
                   onTap: ()=>Navigator.pushNamed(context, MessagesScreen.routeName),
-                  child: ChatContactCard());
+                  child: const ChatContactCard());
               },
               childCount: 20,
             ),
