@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1053574568467",
+    "project_id": "telechat-a",
+    "storage_bucket": "telechat-a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053574568467:android:1988832758d53ba54c7de6",
+        "android_client_info": {
+          "package_name": "com.example.chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053574568467-b3t0tbi9hlejfngdmq57d3b06lct1q94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7BxtQ6XUDy-PsDCZ6UuoFhpgI94fW6_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053574568467-b3t0tbi9hlejfngdmq57d3b06lct1q94.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

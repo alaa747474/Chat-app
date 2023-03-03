@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
+
 import 'package:chat_app/features/chat/presentation/screens/chat_screen.dart';
 import 'package:chat_app/features/contacts/presentation/screens/contacts_screen.dart';
 import 'package:chat_app/features/settings/presentation/screens/settings_screen.dart';
-import 'package:meta/meta.dart';
 
 part 'home_state.dart';
 

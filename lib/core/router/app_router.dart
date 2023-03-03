@@ -3,7 +3,6 @@ import 'package:chat_app/features/auth/presentation/screens/otp_screen.dart';
 import 'package:chat_app/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:chat_app/features/chat/presentation/screens/messages_screen.dart';
 import 'package:chat_app/features/home/presentation/screens/home_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

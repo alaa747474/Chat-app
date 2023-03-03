@@ -1,4 +1,4 @@
-import 'package:chat_app/core/widgets/custom_search_field.dart';
+
 import 'package:chat_app/features/chat/presentation/widgets/custom_text_field.dart';
 import 'package:chat_app/features/chat/presentation/widgets/reciver_message_card.dart';
 import 'package:chat_app/features/chat/presentation/widgets/sender_message_card.dart';
@@ -23,10 +23,10 @@ class MessagesScreen extends StatelessWidget {
               child: ListView.builder(
                 itemCount:50,
                 itemBuilder:(context, index) {
-                return index.isOdd?ReciverMessageCard():SenderMessageCard();
+                return index.isOdd?const ReciverMessageCard():const SenderMessageCard();
               },),
             ),
-          CustomTextField()
+          const CustomTextField()
           ],
         ),
       ),

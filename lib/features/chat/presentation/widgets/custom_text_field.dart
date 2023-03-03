@@ -46,7 +46,7 @@ class CustomTextField extends StatelessWidget {
                 ),
               ),
             ),
-          IconButton(onPressed: (){}, icon:CircleAvatar(
+          IconButton(onPressed: (){}, icon:const CircleAvatar(
               child: Center(child: Icon(Icons.arrow_upward),),
             ) )
             

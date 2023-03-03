@@ -17,7 +17,7 @@ class ChatContactCard extends StatelessWidget {
               children: [
                 Center(
                   child: CircleAvatar(
-                     backgroundImage: NetworkImage('https://pbs.twimg.com/media/FjyOjaTWQAA0b4M?format=jpg&name=large'),
+                     backgroundImage: const NetworkImage('https://pbs.twimg.com/media/FjyOjaTWQAA0b4M?format=jpg&name=large'),
                     radius: 30.r,
                   ),
                 ),

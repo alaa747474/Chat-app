@@ -1,6 +1,5 @@
 import 'package:chat_app/features/auth/presentation/widgets/otp_text_filed.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
@@ -18,8 +17,8 @@ class OTPScreen extends StatelessWidget {
     
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            LottieBuilder.network('https://assets7.lottiefiles.com/packages/lf20_E5iNF8.json',fit: BoxFit.cover,width: 
-            300.r,height: 250.r,),
+            LottieBuilder.network('https://assets8.lottiefiles.com/private_files/lf30_z588h1j0.json',fit: BoxFit.cover,width: 
+            250.r,height: 200.r,),
             SizedBox(height: 25.h,),
             Text('Enter Code',style: Theme.of(context).textTheme.headline1,),
             SizedBox(height: 5.h,),
@@ -36,6 +35,7 @@ class OTPScreen extends StatelessWidget {
             OTPTextField(isLast: true,),
             ],
             ),
+            TextButton(onPressed: (){}, child: Text('Didn\'t get the code?',style: Theme.of(context).textTheme.bodyText1,))
           ],
         ),
       ),
