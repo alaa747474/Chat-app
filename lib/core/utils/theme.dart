@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppTheme {
   static ThemeData theme() {
     return ThemeData(
+      disabledColor: Color.fromARGB(255, 70, 70, 70),
       primaryColorLight: Colors.white,
       focusColor: const Color.fromARGB(255, 57, 125, 227),
       hintColor: const Color.fromARGB(255, 104, 104, 104),
