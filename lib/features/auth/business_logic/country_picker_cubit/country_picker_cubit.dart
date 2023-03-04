@@ -7,8 +7,7 @@ part 'country_picker_state.dart';
 class CountryPickerCubit extends Cubit<CountryPickerState> {
   CountryPickerCubit() : super(CountryPickerInitial());
 
-  
-  pickCountry(BuildContext context) { 
+  pickCountry(BuildContext context) {
     showCountryPicker(
         exclude: ['IL'],
         showPhoneCode: true,
@@ -30,9 +29,7 @@ class CountryPickerCubit extends Cubit<CountryPickerState> {
                 fillColor: Theme.of(context).shadowColor)),
         context: context,
         onSelect: (s) {
-          
-          emit(CountryPicked(s.phoneCode,s.countryCode,s.name));
-          
+          emit(CountryPicked(s.phoneCode, s.countryCode, s.name));
         });
   }
 }

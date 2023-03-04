@@ -1,4 +1,5 @@
-import 'package:chat_app/features/auth/business_logic/cubit/country_picker_cubit.dart';
+import 'package:chat_app/features/auth/business_logic/country_picker_cubit/country_picker_cubit.dart';
+import 'package:chat_app/features/auth/business_logic/sign_in_cubit/sign_in_cubit.dart';
 import 'package:chat_app/features/auth/presentation/screens/otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,10 +7,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import '../widgets/auth_widgets.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
   static const String routeName = '/sign_in_screen';
-  
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  final TextEditingController phoneNumberController = TextEditingController();
+  late String phoneCode;
+  @override
+  void dispose() {
+    phoneNumberController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,11 +57,14 @@ class SignInScreen extends StatelessWidget {
                   BlocBuilder<CountryPickerCubit, CountryPickerState>(
                     builder: (context, state) {
                       if (state is CountryPicked) {
-                        return CountryFlagNameRow(onTap: (){
-                          context
-                                .read<CountryPickerCubit>()
-                                .pickCountry(context);
-                        }, countryName: state.countryName, countryCode: state.countryCode);
+                        return CountryFlagNameRow(
+                            onTap: () {
+                              context
+                                  .read<CountryPickerCubit>()
+                                  .pickCountry(context);
+                            },
+                            countryName: state.countryName,
+                            countryCode: state.countryCode);
                       }
                       return TextButton(
                           onPressed: () {
@@ -65,7 +82,10 @@ class SignInScreen extends StatelessWidget {
                   BlocBuilder<CountryPickerCubit, CountryPickerState>(
                     builder: (context, state) {
                       if (state is CountryPicked) {
-                        return PhoneNumberTextField(phoneCode: state.phoneCode);
+                        phoneCode = state.phoneCode;
+                        return PhoneNumberTextField(
+                            controller: phoneNumberController,
+                            phoneCode: state.phoneCode);
                       }
                       return const PhoneNumberHintText();
                     },
@@ -77,10 +97,22 @@ class SignInScreen extends StatelessWidget {
                   BlocBuilder<CountryPickerCubit, CountryPickerState>(
                     builder: (context, state) {
                       if (state is CountryPicked) {
-                        return CustomButton(
-                          text: 'Continue',
-                          onPressed: () =>
-                              Navigator.pushNamed(context, OTPScreen.routeName),
+                        return BlocConsumer<SignInCubit, SignInState>(
+                          listener: (context, state) {
+                            if (state is PhoneNumberSubmited) {
+                              Navigator.pushNamed(context, OTPScreen.routeName,arguments: state.verificationId);
+                            }
+                          },
+                          builder: (context, state) {
+                            return CustomButton(
+                              text: 'Continue',
+                              onPressed: () {
+                                context.read<SignInCubit>().signInWithPhone(
+                                    phoneNumber:
+                                        '+$phoneCode${phoneNumberController.text}');
+                              },
+                            );
+                          },
                         );
                       }
                       return const CustomButton(

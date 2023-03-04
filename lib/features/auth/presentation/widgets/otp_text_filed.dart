@@ -3,14 +3,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OTPTextField extends StatelessWidget {
-  const OTPTextField({super.key,this.isLast=false});
+  const OTPTextField({super.key,this.isLast=false, required this.controller, });
   final bool isLast;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
         width: 40.r,
         height: 80.r,
         child: TextFormField(
+          controller: controller,
           showCursor: false,
           style: Theme.of(context).textTheme.headline4,
           decoration: InputDecoration(

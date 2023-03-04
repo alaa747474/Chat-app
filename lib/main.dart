@@ -1,20 +1,19 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:chat_app/core/utils/service_locator.dart';
+import 'package:chat_app/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:chat_app/core/router/app_router.dart';
 import 'package:chat_app/core/utils/theme.dart';
-import 'package:chat_app/features/auth/presentation/screens/sign_in_screen.dart';
 
 import 'firebase_options.dart';
 
-void main() async{
- 
+void main() async {
+   WidgetsFlutterBinding.ensureInitialized();
+   await Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform,);
+   serviceLocatorSetUp();
   runApp(const MyApp());
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-);
-getData();
 }
 
 class MyApp extends StatelessWidget {
@@ -37,8 +36,3 @@ class MyApp extends StatelessWidget {
         });
   }
 }
- getData()async{
- var c= await FirebaseFirestore.instance.collection('users').doc('87DMBSB121IwDEfKmvL4').get();
- Map<String, dynamic>? x= c.data();
- print(x!['name']);
- }

@@ -4,9 +4,10 @@ part of 'country_picker_cubit.dart';
 abstract class CountryPickerState {}
 
 class CountryPickerInitial extends CountryPickerState {}
-class CountryPicked extends CountryPickerState{
+
+class CountryPicked extends CountryPickerState {
   final String phoneCode;
   final String countryCode;
   final String countryName;
-  CountryPicked(this.phoneCode,this.countryCode,this.countryName);
+  CountryPicked(this.phoneCode, this.countryCode, this.countryName);
 }
