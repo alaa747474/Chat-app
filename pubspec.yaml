@@ -47,6 +47,8 @@ dependencies:
   flutter_contacts: ^1.1.6
   firebase_auth: ^4.2.9
   get_it: ^7.2.0
+  image_picker: ^0.8.6+4
+  firebase_storage: ^11.0.14
 
 dev_dependencies:
   flutter_test:

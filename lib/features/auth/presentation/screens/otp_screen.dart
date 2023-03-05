@@ -1,5 +1,6 @@
 import 'package:chat_app/core/widgets/loading_indicator.dart';
 import 'package:chat_app/features/auth/business_logic/sign_in_cubit/sign_in_cubit.dart';
+import 'package:chat_app/features/settings/presentation/screens/user_information_screen.dart';
 import 'package:chat_app/features/auth/presentation/widgets/auth_widgets.dart';
 import 'package:chat_app/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +92,7 @@ class _OTPScreenState extends State<OTPScreen> {
             BlocConsumer<SignInCubit, SignInState>(
               listener: (context, state) {
                 if (state is OTPVerified) {
-                  Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+                  Navigator.pushReplacementNamed(context, UserInformationScreen.routeName);
                 }
               },
               builder: (context, state) {
