@@ -1,5 +1,4 @@
 import 'package:chat_app/features/auth/presentation/widgets/auth_widgets.dart';
-import 'package:chat_app/features/chat/presentation/widgets/custom_text_field.dart';
 import 'package:chat_app/features/home/presentation/screens/home_screen.dart';
 import 'package:chat_app/features/settings/business_logic/user_information_cubit/user_information_cubit.dart';
 import 'package:chat_app/features/settings/presentation/widgets/user_information_text_field.dart';

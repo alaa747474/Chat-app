@@ -2,6 +2,7 @@ import 'package:chat_app/core/services/firestore_service.dart';
 import 'package:chat_app/core/utils/service_locator.dart';
 import 'package:chat_app/core/widgets/custom_sliver_app_bar.dart';
 import 'package:chat_app/core/widgets/loading_indicator.dart';
+import 'package:chat_app/features/chat/presentation/screens/messages_screen.dart';
 import 'package:chat_app/features/contacts/business_logic/contacts_cubit/contacts_cubit.dart';
 import 'package:chat_app/features/contacts/business_logic/logged_in_contacts_cubit/logged_in_contacts_cubit.dart';
 import 'package:chat_app/features/contacts/data/repository/contacts_repository.dart';
@@ -51,12 +52,17 @@ class ContactsScreen extends StatelessWidget {
                           sliver: SliverList(
                             delegate: SliverChildBuilderDelegate(
                               (BuildContext context, int index) {
-                                return ContactDetailsCard(
-                                  contactName: loggedInContacts[index].name,
-                                  contactNumber:
-                                      loggedInContacts[index].phoneNumber,
-                                  contactImage:
-                                      loggedInContacts[index].profilePic,
+                                return InkWell(
+                                  onTap: (){
+                                    Navigator.pushNamed(context, MessagesScreen.routeName,arguments: loggedInContacts[index]);
+                                  },
+                                  child: ContactDetailsCard(
+                                    contactName: loggedInContacts[index].name,
+                                    contactNumber:
+                                        loggedInContacts[index].phoneNumber,
+                                    contactImage:
+                                        loggedInContacts[index].profilePic,
+                                  ),
                                 );
                               },
                               childCount: loggedInContacts.length,
@@ -72,7 +78,7 @@ class ContactsScreen extends StatelessWidget {
                 ],
               );
             }
-            return LoadingIndicator();
+            return const LoadingIndicator();
           },
         ),
         backgroundColor: Theme.of(context).shadowColor,

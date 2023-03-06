@@ -2,6 +2,7 @@ import 'package:chat_app/core/services/firebase_storage_service.dart';
 import 'package:chat_app/core/services/firestore_service.dart';
 import 'package:chat_app/features/auth/business_logic/sign_in_cubit/sign_in_cubit.dart';
 import 'package:chat_app/features/auth/data/repository/sign_in_repository.dart';
+import 'package:chat_app/features/chat/data/repository/chat_repository.dart';
 import 'package:chat_app/features/contacts/business_logic/contacts_cubit/contacts_cubit.dart';
 import 'package:chat_app/features/contacts/business_logic/logged_in_contacts_cubit/logged_in_contacts_cubit.dart';
 import 'package:chat_app/features/contacts/data/repository/contacts_repository.dart';
@@ -14,6 +15,8 @@ import 'package:get_it/get_it.dart';
 
 GetIt getIt = GetIt.instance;
 void serviceLocatorSetUp() {
+  getIt.registerSingleton<FirebaseStorageService>(FirebaseStorageService(FirebaseStorage.instance));
+  getIt.registerSingleton<FirestoreService>(FirestoreService(FirebaseFirestore.instance));
   getIt.registerSingleton<SignInCubit>(SignInCubit(
       FirebaseAuth.instance, SignInRepository(FirebaseAuth.instance)));
   getIt.registerSingleton<UserInformationCubit>(UserInformationCubit(
@@ -21,6 +24,7 @@ void serviceLocatorSetUp() {
           FirebaseStorageService(FirebaseStorage.instance),
           FirebaseAuth.instance,
           FirestoreService(FirebaseFirestore.instance))));
-  getIt.registerSingleton<ContactsCubit>(ContactsCubit(ContactsRepository(FirestoreService(FirebaseFirestore.instance))));  
-    getIt.registerSingleton<LoggedInContactsCubit>(LoggedInContactsCubit(ContactsRepository(FirestoreService(FirebaseFirestore.instance))));        
+  getIt.registerSingleton<ContactsCubit>(ContactsCubit(ContactsRepository(getIt.get<FirestoreService>())));  
+    getIt.registerSingleton<LoggedInContactsCubit>(LoggedInContactsCubit(ContactsRepository(getIt.get<FirestoreService>())));        
+  getIt.registerSingleton<ChatRepository>(ChatRepository(FirebaseFirestore.instance, FirebaseAuth.instance,getIt.get<FirestoreService>()));
 }

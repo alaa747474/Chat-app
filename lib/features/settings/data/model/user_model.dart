@@ -4,8 +4,8 @@ class UserModel {
   final String email;
   final String profilePic;
   final String phoneNumber;
-
-  UserModel(this.name, this.email, this.profilePic, this.phoneNumber);
+  final String uid;
+  UserModel(this.name, this.email, this.profilePic, this.phoneNumber,this.uid);
 
 
   Map<String, dynamic> toJson() {
@@ -14,6 +14,7 @@ class UserModel {
       'email': email,
       'profilePic': profilePic,
       'phoneNumber': phoneNumber,
+      'uid':uid
     };
   }
 
@@ -23,6 +24,7 @@ class UserModel {
       map['email'] ?? '',
       map['profilePic'] ?? '',
       map['phoneNumber'] ?? '',
+      map['uid']??''
     );
   }
 
