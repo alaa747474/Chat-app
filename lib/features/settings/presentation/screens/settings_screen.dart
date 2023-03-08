@@ -1,10 +1,10 @@
 import 'package:chat_app/core/utils/service_locator.dart';
 import 'package:chat_app/core/widgets/loading_indicator.dart';
 import 'package:chat_app/features/auth/business_logic/sign_in_cubit/sign_in_cubit.dart';
+import 'package:chat_app/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:chat_app/features/contacts/business_logic/logged_in_contacts_cubit/logged_in_contacts_cubit.dart';
 import 'package:chat_app/features/settings/presentation/widgets/settings_container.dart';
 import 'package:chat_app/features/settings/presentation/widgets/user_information_column.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,15 +30,12 @@ class SettingsScreen extends StatelessWidget {
             BlocBuilder<LoggedInContactsCubit, LoggedInContactsState>(
               builder: (context, state) {
                 if (state is LoggedInContactsLoaded) {
-                  var userInformation = state.users
-                      .where((element) =>
-                          element.uid == FirebaseAuth.instance.currentUser!.uid)
-                      .toList();
+                      var currentUser=context.read<LoggedInContactsCubit>().getCurrentUserData();
                   return UserInformationColumn(
-                      userName: userInformation[0].name,
-                      image: userInformation[0].profilePic,
-                      email: userInformation[0].email,
-                      phoneNumber: userInformation[0].phoneNumber);
+                      userName: currentUser.name,
+                      image: currentUser.profilePic,
+                      email: currentUser.email,
+                      phoneNumber: currentUser.phoneNumber);
                 }
                 return const LoadingIndicator();
               },
@@ -62,7 +59,12 @@ class SettingsScreen extends StatelessWidget {
             SizedBox(
               height: 5.h,
             ),
-            BlocBuilder<SignInCubit, SignInState>(
+            BlocConsumer<SignInCubit, SignInState>(
+              listener: (context, state) {
+                if (state is SignOutDone) {
+                  Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+                }
+              },
               builder: (context, state) {
                 return SettingsContainer(
                   onTap: () {

@@ -59,7 +59,7 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
                     onTap: () {
                       context
                           .read<SettingsCubit>()
-                          .pickImage(source: ImageSource.gallery);
+                          .pickImage(source: ImageSource.camera);
                     },
                     child: Center(
                       child: CircleAvatar(

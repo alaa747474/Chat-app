@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:chat_app/core/services/firestore_service.dart';
 import 'package:chat_app/core/utils/contants.dart';
+import 'package:chat_app/features/chat/data/model/chat_contact.dart';
 import 'package:chat_app/features/chat/data/model/message.dart';
 import 'package:chat_app/features/chat/data/repository/base_chat_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -40,13 +43,39 @@ class ChatRepository extends BaseChatRepository {
 
   @override
   Stream<List<Message>> getMessages({required String reciverUid}) {
-  return  _firestore
+    return _firestore
         .collection(strings.usersCollection)
         .doc(_auth.currentUser!.uid)
         .collection(strings.chatCollection)
         .doc(reciverUid)
-        .collection(strings.messagesCollection).orderBy('timeSent').snapshots().map((event) {
-          return event.docs.map((e) => Message.fromJson(e.data())).toList();
-        });
+        .collection(strings.messagesCollection)
+        .orderBy('timeSent')
+        .snapshots()
+        .map((event) {
+      return event.docs.map((e) => Message.fromJson(e.data())).toList();
+    });
+  }
+
+  @override
+  Stream<List<ChatContact>> getChatContacts() {
+    return _firestore
+        .collection(strings.usersCollection)
+        .doc(_auth.currentUser!.uid)
+        .collection(strings.chatCollection)
+        .snapshots().map((event) {
+          return event.docs.map((e) => ChatContact.fromJson(e.data())).toList();
+        } );
+  }
+
+  @override
+  Future<void> saveChatContact(
+      {required String reciverUid, required ChatContact chatContact}) async {
+    await _firestore
+        .collection(strings.usersCollection)
+        .doc(_auth.currentUser!.uid)
+        .collection(strings.chatCollection)
+        .doc(reciverUid)
+        .set(chatContact.toJson());
+
   }
 }

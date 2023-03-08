@@ -1,6 +1,7 @@
-
 import 'package:chat_app/core/utils/service_locator.dart';
+import 'package:chat_app/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:chat_app/features/home/presentation/screens/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,9 +11,11 @@ import 'package:chat_app/core/utils/theme.dart';
 import 'firebase_options.dart';
 
 void main() async {
-   WidgetsFlutterBinding.ensureInitialized();
-   await Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform,);
-   serviceLocatorSetUp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  serviceLocatorSetUp();
   runApp(const MyApp());
 }
 
@@ -31,7 +34,9 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.theme(),
             debugShowCheckedModeBanner: false,
             onGenerateRoute: AppRouter.generateRoute,
-            initialRoute: HomeScreen.routeName,
+            initialRoute: FirebaseAuth.instance.currentUser == null
+                ? SignInScreen.routeName
+                : HomeScreen.routeName,
           );
         });
   }

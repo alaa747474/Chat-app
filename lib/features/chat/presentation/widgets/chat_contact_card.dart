@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChatContactCard extends StatelessWidget {
-  const ChatContactCard({super.key});
-
+  const ChatContactCard({super.key, required this.image, required this.contactName, required this.lastMessage, required this.timeSent});
+ final String image;
+  final String contactName;
+   final String lastMessage;
+    final String timeSent;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,7 +20,7 @@ class ChatContactCard extends StatelessWidget {
               children: [
                 Center(
                   child: CircleAvatar(
-                     backgroundImage: const NetworkImage('https://pbs.twimg.com/media/FjyOjaTWQAA0b4M?format=jpg&name=large'),
+                     backgroundImage:  NetworkImage(image),
                     radius: 30.r,
                   ),
                 ),
@@ -32,12 +35,12 @@ class ChatContactCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       
-                      Text('Contact Name',style: Theme.of(context).textTheme.headline4,),
+                      Text(contactName,style: Theme.of(context).textTheme.headline4,),
                       SizedBox(height:2.h,),
-                      Text('last seen recently',style: Theme.of(context).textTheme.headline5,),
+                      Text(lastMessage,style: Theme.of(context).textTheme.headline5,),
                     ],
                   ),
-                  Text('9:02 pm',style: Theme.of(context).textTheme.headline5)
+                  Text(timeSent,style: Theme.of(context).textTheme.headline5)
                   ],
                  ),
                )

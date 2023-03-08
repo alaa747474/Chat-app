@@ -23,9 +23,8 @@ class ContactsScreen extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt.get<ContactsCubit>()..getContacts(),
         ),
-        BlocProvider(
-          create: (context) => LoggedInContactsCubit(
-              ContactsRepository(FirestoreService(FirebaseFirestore.instance)))
+        BlocProvider.value(
+          value: getIt.get<LoggedInContactsCubit>()
             ..getUsers(),
         )
       ],

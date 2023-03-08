@@ -9,3 +9,9 @@ class MessagesLoaded extends ChatState {
 
   MessagesLoaded(this.messages);
 }
+class ChatContactsLoaded extends ChatState {
+  final List<ChatContact>chatContacts;
+
+  ChatContactsLoaded (this.chatContacts);
+}
+

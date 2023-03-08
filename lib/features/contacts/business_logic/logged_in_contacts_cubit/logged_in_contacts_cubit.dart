@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:chat_app/features/contacts/data/repository/contacts_repository.dart';
 import 'package:chat_app/features/settings/data/model/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_contacts/contact.dart';
 import 'package:meta/meta.dart';
 
@@ -10,9 +11,9 @@ class LoggedInContactsCubit extends Cubit<LoggedInContactsState> {
   LoggedInContactsCubit(this._contactsRepository)
       : super(LoggedInContactsInitial());
   final ContactsRepository _contactsRepository;
-  getUsers() {
-    _contactsRepository.getAllUsers().then((users) {
-      emit(LoggedInContactsLoaded(users));
+  getUsers() async{
+   await _contactsRepository.getAllUsers().then((users) {
+        emit(LoggedInContactsLoaded(users));
     });
   }
 
@@ -27,5 +28,11 @@ class LoggedInContactsCubit extends Cubit<LoggedInContactsState> {
       }
     }
     return loggedInContacts;
+  }
+  getCurrentUserData() {
+    if (state is LoggedInContactsLoaded) {
+      return (state as LoggedInContactsLoaded).users.firstWhere(
+          (element) => element.uid == FirebaseAuth.instance.currentUser!.uid);
+    }
   }
 }

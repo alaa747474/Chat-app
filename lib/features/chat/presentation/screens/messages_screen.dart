@@ -1,5 +1,6 @@
 import 'package:chat_app/core/widgets/loading_indicator.dart';
 import 'package:chat_app/features/chat/business_logic/bloc/chat_bloc.dart';
+import 'package:chat_app/features/chat/data/model/chat_contact.dart';
 import 'package:chat_app/features/chat/presentation/widgets/custom_text_field.dart';
 import 'package:chat_app/features/chat/presentation/widgets/reciver_message_card.dart';
 import 'package:chat_app/features/chat/presentation/widgets/sender_message_card.dart';
@@ -64,7 +65,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                 children: [
                   Expanded(
                     child: ListView.builder(
-                      physics:const BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       controller: _scrollController,
                       itemCount: state.messages.length,
                       itemBuilder: (context, index) {
@@ -90,6 +91,15 @@ class _MessagesScreenState extends State<MessagesScreen> {
                             context.read<ChatBloc>().add(SendMessage(
                                 messageController.text,
                                 widget.reviverUser.uid));
+                            ChatContact chatContact = ChatContact(
+                              contactId: widget.reviverUser.uid,
+                              phoneNumber: widget.reviverUser.phoneNumber,
+                                name: widget.reviverUser.name,
+                                profilePic: widget.reviverUser.profilePic,
+                                timeSent: DateTime.now(),
+                                lastMessage: messageController.text);
+                            context.read<ChatBloc>().add(SaveChatContact(
+                                chatContact, widget.reviverUser.uid));
                           }
                           scrollToLastIndex();
                         },
