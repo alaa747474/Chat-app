@@ -1,9 +1,11 @@
+import 'package:chat_app/core/utils/service_locator.dart';
 import 'package:chat_app/core/widgets/loading_indicator.dart';
 import 'package:chat_app/features/chat/business_logic/bloc/chat_bloc.dart';
 import 'package:chat_app/features/chat/data/model/chat_contact.dart';
 import 'package:chat_app/features/chat/presentation/widgets/custom_text_field.dart';
 import 'package:chat_app/features/chat/presentation/widgets/reciver_message_card.dart';
 import 'package:chat_app/features/chat/presentation/widgets/sender_message_card.dart';
+import 'package:chat_app/features/contacts/business_logic/logged_in_contacts_cubit/logged_in_contacts_cubit.dart';
 import 'package:chat_app/features/settings/data/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -47,71 +49,86 @@ class _MessagesScreenState extends State<MessagesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(context, widget.reviverUser.name,
-          widget.reviverUser.phoneNumber, widget.reviverUser.profilePic),
-      body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/background.png'),
-                fit: BoxFit.cover,
-                opacity: 0.25)),
-        height: double.maxFinite,
-        child: BlocBuilder<ChatBloc, ChatState>(
-          builder: (context, state) {
-            if (state is MessagesLoaded) {
-              scrollToLastIndex();
-              return Column(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      controller: _scrollController,
-                      itemCount: state.messages.length,
-                      itemBuilder: (context, index) {
-                        return state.messages[index].senderUid !=
-                                FirebaseAuth.instance.currentUser!.uid
-                            ? ReciverMessageCard(
-                                timeSent: DateFormat.Hm()
-                                    .format(state.messages[index].timeSent),
-                                text: state.messages[index].message,
-                              )
-                            : SenderMessageCard(
-                                timeSent: DateFormat.Hm()
-                                    .format(state.messages[index].timeSent),
-                                text: state.messages[index].message);
-                      },
-                    ),
-                  ),
-                  BlocBuilder<ChatBloc, ChatState>(
-                    builder: (context, state) {
-                      return CustomTextField(
-                        sendMessageOnPressed: () {
-                          if (!context.read<ChatBloc>().isClosed) {
-                            context.read<ChatBloc>().add(SendMessage(
-                                messageController.text,
-                                widget.reviverUser.uid));
-                            ChatContact chatContact = ChatContact(
-                              contactId: widget.reviverUser.uid,
-                              phoneNumber: widget.reviverUser.phoneNumber,
-                                name: widget.reviverUser.name,
-                                profilePic: widget.reviverUser.profilePic,
-                                timeSent: DateTime.now(),
-                                lastMessage: messageController.text);
-                            context.read<ChatBloc>().add(SaveChatContact(
-                                chatContact, widget.reviverUser.uid));
-                          }
-                          scrollToLastIndex();
+    return BlocProvider.value(
+      value: getIt.get<LoggedInContactsCubit>()..getUsers(),
+      child: Scaffold(
+        appBar: buildAppBar(context, widget.reviverUser.name,
+            widget.reviverUser.phoneNumber, widget.reviverUser.profilePic),
+        body: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/background.png'),
+                  fit: BoxFit.cover,
+                  opacity: 0.25)),
+          height: double.maxFinite,
+          child: BlocBuilder<ChatBloc, ChatState>(
+            builder: (context, state) {
+              if (state is MessagesLoaded) {
+                scrollToLastIndex();
+                return Column(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        controller: _scrollController,
+                        itemCount: state.messages.length,
+                        itemBuilder: (context, index) {
+                          return state.messages[index].senderUid !=
+                                  FirebaseAuth.instance.currentUser!.uid
+                              ? ReciverMessageCard(
+                                  timeSent: DateFormat.Hm()
+                                      .format(state.messages[index].timeSent),
+                                  text: state.messages[index].message,
+                                )
+                              : SenderMessageCard(
+                                  timeSent: DateFormat.Hm()
+                                      .format(state.messages[index].timeSent),
+                                  text: state.messages[index].message);
                         },
-                        controller: messageController,
-                      );
-                    },
-                  )
-                ],
-              );
-            }
-            return const LoadingIndicator();
-          },
+                      ),
+                    ),
+                    BlocBuilder<ChatBloc, ChatState>(
+                      builder: (context, state) {
+                        return CustomTextField(
+                          sendMessageOnPressed: () {
+                            if (!context.read<ChatBloc>().isClosed) {
+                              UserModel currentUser = context
+                                  .read<LoggedInContactsCubit>()
+                                  .getCurrentUserData();
+                              context.read<ChatBloc>().add(SendMessage(
+                                  messageController.text,
+                                  widget.reviverUser.uid));
+                              ChatContact senderChatContact = ChatContact(
+                                  contactId: widget.reviverUser.uid,
+                                  phoneNumber: widget.reviverUser.phoneNumber,
+                                  name: widget.reviverUser.name,
+                                  profilePic: widget.reviverUser.profilePic,
+                                  timeSent: DateTime.now(),
+                                  lastMessage: messageController.text);
+                              ChatContact reciverChatContact = ChatContact(
+                                  contactId: currentUser.uid,
+                                  phoneNumber: currentUser.phoneNumber,
+                                  name: currentUser.name,
+                                  profilePic: currentUser.profilePic,
+                                  timeSent: DateTime.now(),
+                                  lastMessage: messageController.text);
+                              context.read<ChatBloc>().add(SaveChatContact(
+                                  widget.reviverUser.uid,
+                                  senderChatContact,
+                                  reciverChatContact));
+                            }
+                            scrollToLastIndex();
+                          },
+                          controller: messageController,
+                        );
+                      },
+                    )
+                  ],
+                );
+              }
+              return const LoadingIndicator();
+            },
+          ),
         ),
       ),
     );

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:chat_app/features/contacts/business_logic/logged_in_contacts_cubit/logged_in_contacts_cubit.dart';
 import 'package:chat_app/features/settings/data/model/user_model.dart';
 import 'package:chat_app/features/settings/data/repository/user_information_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';

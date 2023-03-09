@@ -41,7 +41,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     _chatRepository.sendMessage(messageText: event.messageText, reciverUid: event.reciverUid);
   }
   _saveChatContact(SaveChatContact event,Emitter<ChatState>emit){
-    _chatRepository.saveChatContact(reciverUid: event.reciverUid, chatContact:event.chatContact );
+    _chatRepository.saveChatContact(reciverUid: event.reciverUid, senderChatContact: event.senderChatContact,reciverChatContact:event.reciverChatContact  );
   }
 
 }

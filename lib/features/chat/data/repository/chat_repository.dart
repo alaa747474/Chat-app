@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:chat_app/core/services/firestore_service.dart';
 import 'package:chat_app/core/utils/contants.dart';
@@ -69,13 +68,19 @@ class ChatRepository extends BaseChatRepository {
 
   @override
   Future<void> saveChatContact(
-      {required String reciverUid, required ChatContact chatContact}) async {
+      {required String reciverUid, required ChatContact senderChatContact,required ChatContact reciverChatContact}) async {
     await _firestore
         .collection(strings.usersCollection)
         .doc(_auth.currentUser!.uid)
         .collection(strings.chatCollection)
         .doc(reciverUid)
-        .set(chatContact.toJson());
+        .set(senderChatContact.toJson());
+    await _firestore
+        .collection(strings.usersCollection)
+        .doc(reciverUid)
+        .collection(strings.chatCollection)
+        .doc(_auth.currentUser!.uid)
+        .set(reciverChatContact.toJson());
 
   }
 }

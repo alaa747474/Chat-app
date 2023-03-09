@@ -1,14 +1,12 @@
-import 'package:chat_app/core/services/firestore_service.dart';
+
 import 'package:chat_app/core/utils/service_locator.dart';
 import 'package:chat_app/core/widgets/custom_sliver_app_bar.dart';
 import 'package:chat_app/core/widgets/loading_indicator.dart';
 import 'package:chat_app/features/chat/presentation/screens/messages_screen.dart';
 import 'package:chat_app/features/contacts/business_logic/contacts_cubit/contacts_cubit.dart';
 import 'package:chat_app/features/contacts/business_logic/logged_in_contacts_cubit/logged_in_contacts_cubit.dart';
-import 'package:chat_app/features/contacts/data/repository/contacts_repository.dart';
 import 'package:chat_app/features/contacts/presentation/widgets/contact_details_card.dart';
 import 'package:chat_app/features/settings/data/model/user_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

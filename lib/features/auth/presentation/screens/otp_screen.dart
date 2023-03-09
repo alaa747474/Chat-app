@@ -1,8 +1,6 @@
 import 'package:chat_app/core/widgets/loading_indicator.dart';
 import 'package:chat_app/features/auth/business_logic/sign_in_cubit/sign_in_cubit.dart';
-import 'package:chat_app/features/contacts/business_logic/logged_in_contacts_cubit/logged_in_contacts_cubit.dart';
 import 'package:chat_app/features/home/presentation/screens/home_screen.dart';
-import 'package:chat_app/features/settings/data/model/user_model.dart';
 import 'package:chat_app/features/settings/presentation/screens/user_information_screen.dart';
 import 'package:chat_app/features/auth/presentation/widgets/auth_widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';

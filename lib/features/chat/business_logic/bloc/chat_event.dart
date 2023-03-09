@@ -28,9 +28,10 @@ class SendMessage extends ChatEvent {
 }
 
 class SaveChatContact extends ChatEvent {
-  final ChatContact chatContact;
+  final ChatContact senderChatContact;
+  final ChatContact reciverChatContact;
   final String reciverUid;
-  SaveChatContact(this.chatContact, this.reciverUid);
+  SaveChatContact( this.reciverUid, this.senderChatContact, this.reciverChatContact);
 }
 
 

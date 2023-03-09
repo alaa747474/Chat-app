@@ -17,8 +17,8 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create:(context)=> ChatBloc(getIt.get<ChatRepository>())..add(LoadChatContacts()),
+    return BlocProvider.value(
+     value: ChatBloc(getIt.get<ChatRepository>())..add(LoadChatContacts()),
       child: Scaffold(
         body: CustomScrollView(
           physics: const BouncingScrollPhysics(),

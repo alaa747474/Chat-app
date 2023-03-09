@@ -7,6 +7,6 @@ abstract class BaseChatRepository {
     required String reciverUid,
   });
   Stream<List<Message>> getMessages({required String reciverUid});
-  Future<void>saveChatContact({required String reciverUid,required ChatContact chatContact});
+  Future<void>saveChatContact({required String reciverUid,required ChatContact senderChatContact,required ChatContact reciverChatContact});
   Stream<List<ChatContact>>getChatContacts();
 }
