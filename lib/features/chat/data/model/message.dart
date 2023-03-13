@@ -1,9 +1,18 @@
 
+import 'package:hive/hive.dart';
+part 'message.g.dart';
+
+@HiveType(typeId: 1)
 class Message {
+  @HiveField(0)
   final String message;
+  @HiveField(1)
   final DateTime timeSent;
+  @HiveField(2)
   final String reciverUid;
+  @HiveField(3)
   final String senderUid;
+  @HiveField(4)
   final String messageId;
   Message({
     required this.message,
@@ -32,5 +41,6 @@ class Message {
       messageId: map['messageId'] ?? '',
     );
   }
+  
 
 }

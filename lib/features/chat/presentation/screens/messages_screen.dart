@@ -1,4 +1,5 @@
 import 'package:chat_app/core/utils/service_locator.dart';
+import 'package:chat_app/core/utils/utils.dart';
 import 'package:chat_app/core/widgets/loading_indicator.dart';
 import 'package:chat_app/features/chat/business_logic/bloc/chat_bloc.dart';
 import 'package:chat_app/features/chat/data/model/chat_contact.dart';
@@ -6,6 +7,7 @@ import 'package:chat_app/features/chat/presentation/widgets/custom_text_field.da
 import 'package:chat_app/features/chat/presentation/widgets/reciver_message_card.dart';
 import 'package:chat_app/features/chat/presentation/widgets/sender_message_card.dart';
 import 'package:chat_app/features/contacts/business_logic/logged_in_contacts_cubit/logged_in_contacts_cubit.dart';
+import 'package:chat_app/features/saved_messages/business_logic/bloc/saved_messages_bloc.dart';
 import 'package:chat_app/features/settings/data/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -75,15 +77,38 @@ class _MessagesScreenState extends State<MessagesScreen> {
                         itemBuilder: (context, index) {
                           return state.messages[index].senderUid !=
                                   FirebaseAuth.instance.currentUser!.uid
-                              ? ReciverMessageCard(
-                                  timeSent: DateFormat.Hm()
-                                      .format(state.messages[index].timeSent),
-                                  text: state.messages[index].message,
+                              ?  InkWell(
+                                    onLongPress: () {
+                                      showCustomAlertDialog(context, () {
+                                        context.read<SavedMessagesBloc>().add(
+                                            SaveMessage(
+                                                state.messages[index].messageId,
+                                                state.messages[index]));
+                                      });
+                                    },
+                                    onTap: null,
+                                    child: ReciverMessageCard(
+                                      timeSent: DateFormat.Hm().format(
+                                          state.messages[index].timeSent),
+                                      text: state.messages[index].message,
+                                    ),
+                                  
                                 )
-                              : SenderMessageCard(
-                                  timeSent: DateFormat.Hm()
-                                      .format(state.messages[index].timeSent),
-                                  text: state.messages[index].message);
+                              : InkWell(
+                                onLongPress: () {
+                                      showCustomAlertDialog(context, () {
+                                        context.read<SavedMessagesBloc>().add(
+                                            SaveMessage(
+                                                state.messages[index].messageId,
+                                                state.messages[index]));
+                                      });
+                                    },
+                                    onTap: null,
+                                child: SenderMessageCard(
+                                    timeSent: DateFormat.Hm()
+                                        .format(state.messages[index].timeSent),
+                                    text: state.messages[index].message),
+                              );
                         },
                       ),
                     ),

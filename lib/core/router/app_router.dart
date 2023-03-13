@@ -6,6 +6,9 @@ import 'package:chat_app/features/auth/presentation/screens/sign_in_screen.dart'
 import 'package:chat_app/features/chat/business_logic/bloc/chat_bloc.dart';
 import 'package:chat_app/features/chat/data/repository/chat_repository.dart';
 import 'package:chat_app/features/contacts/business_logic/logged_in_contacts_cubit/logged_in_contacts_cubit.dart';
+import 'package:chat_app/features/saved_messages/business_logic/bloc/saved_messages_bloc.dart';
+import 'package:chat_app/features/saved_messages/data/repository/saved_messages_repository.dart';
+import 'package:chat_app/features/saved_messages/presentation/screens/saved_mesaages_screen.dart';
 import 'package:chat_app/features/settings/business_logic/settings_cubit/settings_cubit.dart';
 import 'package:chat_app/features/settings/business_logic/user_information_cubit/user_information_cubit.dart';
 import 'package:chat_app/features/settings/data/model/user_model.dart';
@@ -46,15 +49,27 @@ class AppRouter {
             child: const UserInformationScreen(),
           ),
         );
+      case SavedMessagesScreen.routeName:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) =>
+                      SavedMessagesBloc(SaveMessagesRepository()),
+                  child: const SavedMessagesScreen(),
+                ));
       case MessagesScreen.routeName:
         final reciverUser = settings.arguments as UserModel;
         return MaterialPageRoute(
-            builder: (_) => BlocProvider.value(
-                  value: ChatBloc(getIt.get<ChatRepository>()),
-                  child: MessagesScreen(
-                    reviverUser: reciverUser,
-                  ),
-                ));
+            builder: (_) => MultiBlocProvider(
+                    providers: [
+                      BlocProvider.value(
+                          value: ChatBloc(getIt.get<ChatRepository>())),
+                      BlocProvider(
+                        create: (context) => SavedMessagesBloc(SaveMessagesRepository())..add(LoadSavedMessage()),
+                      )    
+                    ],
+                    child: MessagesScreen(
+                      reviverUser: reciverUser,
+                    )));
       case OTPScreen.routeName:
         final verificatioId = settings.arguments as String;
         return MaterialPageRoute(
@@ -64,7 +79,8 @@ class AppRouter {
                       value: getIt.get<SignInCubit>(),
                     ),
                     BlocProvider(
-                      create:(context)=> getIt.get<LoggedInContactsCubit>()..getUsers(),
+                      create: (context) =>
+                          getIt.get<LoggedInContactsCubit>()..getUsers(),
                     ),
                   ],
                   child: OTPScreen(

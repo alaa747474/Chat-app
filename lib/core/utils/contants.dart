@@ -1,3 +1,4 @@
+
 class ConstantStrings {
   ConstantStrings._instacne();
   static final instance=ConstantStrings._instacne();
@@ -6,3 +7,5 @@ class ConstantStrings {
   final String messagesCollection='messages';
   
 }
+
+

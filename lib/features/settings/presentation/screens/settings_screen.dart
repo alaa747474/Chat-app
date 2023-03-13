@@ -3,6 +3,7 @@ import 'package:chat_app/core/widgets/loading_indicator.dart';
 import 'package:chat_app/features/auth/business_logic/sign_in_cubit/sign_in_cubit.dart';
 import 'package:chat_app/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:chat_app/features/contacts/business_logic/logged_in_contacts_cubit/logged_in_contacts_cubit.dart';
+import 'package:chat_app/features/saved_messages/presentation/screens/saved_mesaages_screen.dart';
 import 'package:chat_app/features/settings/presentation/widgets/settings_container.dart';
 import 'package:chat_app/features/settings/presentation/widgets/user_information_column.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,9 @@ class SettingsScreen extends StatelessWidget {
               height: 20.h,
             ),
             SettingsContainer(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context,SavedMessagesScreen.routeName);
+              },
               icon: Icons.bookmark_outlined,
               text: 'Saved Messages',
               editContainer: false,
