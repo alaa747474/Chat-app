@@ -11,19 +11,19 @@ class SignInCubit extends Cubit<SignInState> {
   final SignInRepository _signInRepository;
 
   Future<void> signInWithPhone({required String phoneNumber}) async {
-    await _auth.verifyPhoneNumber(
-      phoneNumber: phoneNumber,
-      verificationCompleted: verificationCompleted,
-      verificationFailed: verificationFailed,
-      codeSent: (String verificationId, forceResendingToken) {
-        emit(PhoneNumberSubmited(verificationId));
-      },
-      codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
-    );
+    await _signInRepository.verifyPhone(phoneNumber,
+        completed: verificationCompleted,
+        failed: verificationFailed,
+        codeSent: codeSent,
+        codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
   }
 
   verificationCompleted(PhoneAuthCredential credential) async {
     await _auth.signInWithCredential(credential);
+  }
+
+  codeSent(String verificationId, int? forceRsendingToken) {
+    emit(PhoneNumberSubmited(verificationId));
   }
 
   verificationFailed(FirebaseAuthException error) {

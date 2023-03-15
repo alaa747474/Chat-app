@@ -33,7 +33,7 @@ class ContactDetailsCard extends StatelessWidget {
                     child: contactImage == null
                         ? Text(
                             contactName[0],
-                            style: Theme.of(context).textTheme.headline3,
+                            style: Theme.of(context).textTheme.labelSmall,
                           )
                         : null,
                   ),
@@ -47,12 +47,12 @@ class ContactDetailsCard extends StatelessWidget {
                   children: [
                     Text(
                       contactName,
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                     SizedBox(height: 2.h,)
 ,                    Text(
                       contactNumber,
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ],
                 )

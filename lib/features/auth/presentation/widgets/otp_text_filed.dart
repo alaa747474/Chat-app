@@ -14,7 +14,7 @@ class OTPTextField extends StatelessWidget {
         child: TextFormField(
           controller: controller,
           showCursor: false,
-          style: Theme.of(context).textTheme.headline4,
+          style: Theme.of(context).textTheme.titleLarge,
           decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Theme.of(context).focusColor,width: 2.5),

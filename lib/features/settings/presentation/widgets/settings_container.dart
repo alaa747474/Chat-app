@@ -55,8 +55,8 @@ class SettingsContainer extends StatelessWidget {
             Text(
               text,
               style: editContainer
-                  ? Theme.of(context).textTheme.bodyText1
-                  : Theme.of(context).textTheme.bodyText2,
+                  ? Theme.of(context).textTheme.bodyLarge
+                  : Theme.of(context).textTheme.bodyMedium,
             )
           ],
         ),

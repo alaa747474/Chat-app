@@ -26,7 +26,7 @@ class UserInformationColumn extends StatelessWidget {
         Center(
             child: Text(
           userName,
-          style: Theme.of(context).textTheme.headline1,
+          style: Theme.of(context).textTheme.labelLarge,
         )),
         SizedBox(
           height: 5.h,
@@ -36,14 +36,14 @@ class UserInformationColumn extends StatelessWidget {
           children: [
             Text(
               phoneNumber,
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             SizedBox(
               width: 5.w,
             ),
             Text(
               email,
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
           ],
         ),

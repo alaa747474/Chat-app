@@ -21,7 +21,7 @@ class UserInformationTextField extends StatelessWidget {
         decoration: InputDecoration(
             hintStyle: Theme.of(context)
                 .textTheme
-                .headline5,
+                .titleMedium,
             hintText: hintText,
             focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide.none,

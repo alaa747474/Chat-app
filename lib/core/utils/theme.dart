@@ -17,36 +17,37 @@ class AppTheme {
 
   static TextTheme textTheme() {
     return TextTheme(
-      headline1: TextStyle(
+      
+      labelLarge: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
         fontSize: 25.sp,
       ),
-      headline2: TextStyle(
+      labelMedium: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
         fontSize: 20.sp,
       ),
-      headline3: TextStyle(
+      labelSmall: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.w600,
         fontSize: 18.sp,
       ),
-      headline4: TextStyle(
+      titleLarge: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.w600,
         fontSize: 16.sp,
       ),
-      headline5: TextStyle(
+      titleMedium: TextStyle(
         color: const Color.fromARGB(255, 104, 104, 104),
         fontSize: 16.sp,
       ),
-      bodyText1: TextStyle(
+      bodyLarge: TextStyle(
         color: const Color.fromARGB(255, 57, 125, 227),
         fontWeight: FontWeight.normal,
         fontSize: 16.sp,
       ),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
         color: const Color.fromARGB(255, 255, 255, 255),
         fontWeight: FontWeight.normal,
         fontSize: 16.sp,

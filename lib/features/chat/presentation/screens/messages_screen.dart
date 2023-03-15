@@ -179,11 +179,11 @@ class _MessagesScreenState extends State<MessagesScreen> {
         children: [
           Text(
             userName,
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           Text(
             phone,
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.titleMedium,
           )
         ],
       ),

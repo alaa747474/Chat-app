@@ -27,7 +27,7 @@ class SearchField extends StatelessWidget {
         decoration: InputDecoration(
             hintStyle: Theme.of(context)
                 .textTheme
-                .headline5,
+                .titleMedium,
             hintText: 'Search',
             focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide.none,

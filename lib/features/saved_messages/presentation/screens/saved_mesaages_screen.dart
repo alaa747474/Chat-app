@@ -19,7 +19,7 @@ class SavedMessagesScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).primaryColor,
         title: Text(
           'Saved Messages',
-          style: Theme.of(context).textTheme.headline3,
+          style: Theme.of(context).textTheme.labelSmall,
         ),
       ),
       body: BlocBuilder<SavedMessagesBloc, SavedMessagesState>(

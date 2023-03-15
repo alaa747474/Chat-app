@@ -11,7 +11,7 @@ Future<void> showCustomAlertDialog(
         content: SingleChildScrollView(
           child: ListBody(
             children:  [
-              Text('Are you sure want to save this message?',style: Theme.of(context).textTheme.headline3,),
+              Text('Are you sure want to save this message?',style: Theme.of(context).textTheme.labelSmall,),
             ],
           ),
         ),

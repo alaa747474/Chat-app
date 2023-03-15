@@ -35,12 +35,12 @@ class ChatContactCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       
-                      Text(contactName,style: Theme.of(context).textTheme.headline4,),
+                      Text(contactName,style: Theme.of(context).textTheme.titleLarge,),
                       SizedBox(height:2.h,),
-                      Text(lastMessage,style: Theme.of(context).textTheme.headline5,),
+                      Text(lastMessage,style: Theme.of(context).textTheme.titleMedium,),
                     ],
                   ),
-                  Text(timeSent,style: Theme.of(context).textTheme.headline5)
+                  Text(timeSent,style: Theme.of(context).textTheme.titleMedium)
                   ],
                  ),
                )

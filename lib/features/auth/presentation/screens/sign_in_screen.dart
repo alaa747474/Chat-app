@@ -38,7 +38,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       'https://assets6.lottiefiles.com/packages/lf20_syHuxRsS8U.json'),
                   Text(
                     'Your Phone',
-                    style: Theme.of(context).textTheme.headline1,
+                    style: Theme.of(context).textTheme.labelLarge,
                   ),
                   SizedBox(
                     height: 15.h,
@@ -48,7 +48,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
-                          .headline3!
+                          .labelSmall!
                           .copyWith(fontWeight: FontWeight.normal)),
                   SizedBox(
                     height: 10.h,
@@ -74,7 +74,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           },
                           child: Text(
                             'Select Country',
-                            style: Theme.of(context).textTheme.bodyText1,
+                            style: Theme.of(context).textTheme.labelLarge,
                           ));
                     },
                   ),

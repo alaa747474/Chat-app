@@ -20,7 +20,7 @@ class CustomSliverAppBar extends StatelessWidget {
                 onPressed: () {},
                 child: Text(
                   'Edit',
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.labelMedium,
                 )),
             backgroundColor: Theme.of(context).primaryColor,
             centerTitle: true,

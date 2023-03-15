@@ -21,11 +21,11 @@ class PhoneNumberTextField extends StatelessWidget {
                 
             inputFormatters: [LengthLimitingTextInputFormatter(10)],
             keyboardType: TextInputType.phone,
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context).textTheme.bodyMedium,
             controller: controller,
             decoration: InputDecoration.collapsed(
                 hintText: '00 0000 0000',
-                hintStyle: Theme.of(context).textTheme.headline5),
+                hintStyle: Theme.of(context).textTheme.titleMedium),
           ))
         ],
       ),

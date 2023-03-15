@@ -12,7 +12,7 @@ class CountryPickerCubit extends Cubit<CountryPickerState> {
         exclude: ['IL'],
         showPhoneCode: true,
         countryListTheme: CountryListThemeData(
-            searchTextStyle: Theme.of(context).textTheme.bodyText2,
+            searchTextStyle: Theme.of(context).textTheme.labelMedium,
             bottomSheetHeight: 600.h,
             backgroundColor: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.only(

@@ -54,14 +54,14 @@ class _OTPScreenState extends State<OTPScreen> {
             ),
             Text(
               'Enter Code',
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.labelLarge,
             ),
             SizedBox(
               height: 5.h,
             ),
             Text(
               'We\'ve sent the code to you',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             SizedBox(
               height: 20.h,

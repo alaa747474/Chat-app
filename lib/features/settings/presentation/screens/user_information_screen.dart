@@ -28,7 +28,7 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
         backgroundColor: Theme.of(context).primaryColor,
         title: Text(
           'Your Profile',
-          style: Theme.of(context).textTheme.headline3,
+          style: Theme.of(context).textTheme.labelSmall,
         ),
         centerTitle: true,
       ),

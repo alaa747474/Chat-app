@@ -10,13 +10,13 @@ class PhoneNumberHintText extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       child: Row(
         children: [
-          const Text('+20'),
+          const Text('+00'),
           SizedBox(
             width: 10.w,
           ),
           Text(
             '00 0000 0000',
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
         ],
       ),
